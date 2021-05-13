@@ -1,0 +1,113 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class AV : MonoBehaviour
+{
+    
+
+    int destinyIndex = 0;
+
+    public float speed;
+    public float timeInDevice;
+    float _journeyLength;
+    float _startTime;
+    float _currTimeInDevice;
+    Vector3 _startPosition;
+    Vector3 _targetPosition;
+
+    public List<Device> devices = new List<Device>();
+    Device _currDevice;
+
+    //esto no esta en herencia
+    public Player playerSCR;
+
+
+    bool _arrived = false;
+
+    //no esta en herencia
+    public GameObject playerGO;
+
+    private void Start()
+    {
+        SettingNewDestiny();
+        playerSCR = playerGO.GetComponent<Player>();
+
+    }
+
+    private void Update()
+    {
+        if ((transform.position == _targetPosition) && !_arrived)
+            ArrivedMethod();
+
+        if(!_arrived)
+            Movement();
+
+        if(_arrived)
+        {
+            _currTimeInDevice -= Time.deltaTime;
+            if (_currTimeInDevice <= 0)
+            {
+                _currDevice.SetDefaultMaterial();
+
+                destinyIndex++;
+                if (destinyIndex >= devices.Count)
+                {
+                    destinyIndex = 0;
+                }
+
+                SettingNewDestiny();
+            }
+        }
+
+        Attack();
+
+
+    }
+
+
+    void Attack()
+    {
+        if(transform.position == playerGO.transform.position)
+        {
+            playerSCR.LifeController();
+
+
+        }
+
+
+    }
+
+    void Movement()
+    {
+        _targetPosition = devices[destinyIndex].transform.position;
+        float _distCovered = (Time.time - _startTime) * speed;
+        float _fracJourney = _distCovered / _journeyLength;
+        transform.position = Vector3.Lerp(_startPosition, _targetPosition, _fracJourney);
+    }
+
+    void ArrivedMethod()
+    {
+        _arrived = true;
+        _currTimeInDevice = timeInDevice;
+
+        SetMaterialToDevice();
+    }
+
+    void SettingNewDestiny()
+    {
+        _targetPosition = devices[destinyIndex].transform.position;
+        _startTime = Time.time;
+        _startPosition = transform.position;
+        _journeyLength = Vector3.Distance(_startPosition, _targetPosition);
+
+        _arrived = false;
+    }
+
+    void SetMaterialToDevice()
+    {
+        _currDevice = devices[destinyIndex];
+        //_currDevice.SetMaterial(GetComponent<Renderer>().material);
+        _currDevice.OnEntityEnter(1);
+    }
+}
