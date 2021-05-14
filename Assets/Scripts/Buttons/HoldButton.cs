@@ -62,7 +62,7 @@ public class HoldButton : MonoBehaviour
 
     void EnableLights()
     {
-        foreach (Light light in lightsToChange)
+        foreach (Light light in lightsToChange) //IGna mandate aca
         {
             if (light.enabled == false)
                 light.enabled = true;
