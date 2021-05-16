@@ -12,7 +12,6 @@ public class Device : MonoBehaviour
 
     public bool playerIsHere, isHackeable, isShooteable, canjump;
 
-
     public OpenGate gateToOpen;
 
     [SerializeField] Renderer rendererReference;

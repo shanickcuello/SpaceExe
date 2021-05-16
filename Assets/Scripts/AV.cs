@@ -42,6 +42,7 @@ public class AV : MonoBehaviour
         _line = Instantiate(linePrefab, Vector3.zero, Quaternion.identity);
         _line.enabled = false;
         
+        
     }
 
     private void DestroyMe()
@@ -54,6 +55,7 @@ public class AV : MonoBehaviour
         playerGO = FindObjectOfType<Player>().transform.gameObject;
         SettingNewDestiny();
         playerSCR = playerGO.GetComponent<Player>();
+        devices = DeviceManager.GetNearMe(transform.position, 25);
     }
 
     protected virtual void Update()
@@ -100,8 +102,7 @@ public class AV : MonoBehaviour
         }
 
         Attack();
-
-
+        
     }
 
 
