@@ -59,7 +59,7 @@ public class Player : MonoBehaviour
         targetTransform = device.transform;
         SetInitialDestiny(targetTransform);
 
-        life = 60;
+        life = 100;
 
         cameraPivot = GameObject.Find("CameraPivot");
         cameraScript = cameraPLayer.GetComponent<CameraTwo>();
@@ -109,7 +109,7 @@ public class Player : MonoBehaviour
         if (isIndevice)
             OnDeviceStay();
 
-        gameManagerSCR.lifeBar.fillValue = life * 1 / 60;
+        gameManagerSCR.lifeBar.fillValue = life * 1 / 100;
     }
 
     public void MouseManager()
@@ -213,9 +213,9 @@ public class Player : MonoBehaviour
 
     public void LifeManager()
     {
-        if (life >= 60)
+        if (life >= 100)
         {
-            life = 60;
+            life = 100;
         }
     }
 
