@@ -50,12 +50,12 @@ public class AV : MonoBehaviour
         Destroy(gameObject);
     }
 
-    private void Start()
+    protected virtual void Start()
     {
         playerGO = FindObjectOfType<Player>().transform.gameObject;
         SettingNewDestiny();
         playerSCR = playerGO.GetComponent<Player>();
-        devices = DeviceManager.GetNearMe(transform.position, 25);
+        devices = DeviceManager.GetPcDevices();
     }
 
     protected virtual void Update()
