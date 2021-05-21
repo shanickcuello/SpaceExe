@@ -55,7 +55,6 @@ public class AV : MonoBehaviour
         playerGO = FindObjectOfType<Player>().transform.gameObject;
         SettingNewDestiny();
         playerSCR = playerGO.GetComponent<Player>();
-        devices = DeviceManager.GetPcDevices();
     }
 
     protected virtual void Update()
