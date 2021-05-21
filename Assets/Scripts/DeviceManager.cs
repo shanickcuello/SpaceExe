@@ -31,6 +31,12 @@ public class DeviceManager : MonoBehaviour
     {
         return deviceList;
     }
+    
+    //ZIP - tal vez ponerle indices a algo
+    //Aggregate - buscar la forma de usarlo para reemplazar algun select
+    //Tal vez setear algun valor comparado a algun device (velocidad tal vez)
+    
+    //IA2-P2”
 
     public static List<Device> GetNearMe(Vector3 myPos, int range) //Dada la posición de la IA y un rango de búsqueda, toma los 6 devices más cercanos dentro de un rango, los ordena y los devuelve para pasar como objetivos de la IA.
     {
