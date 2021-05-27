@@ -14,7 +14,7 @@ public class AV : MonoBehaviour
     public LineRenderer linePrefab;
     LineRenderer _line;
 
-    int destinyIndex = 0;
+    public int destinyIndex = 0;
     float _journeyLength;
     float _startTime;
     float _currTimeInDevice;
@@ -31,7 +31,7 @@ public class AV : MonoBehaviour
     public Player playerSCR;
 
 
-    bool _arrived = false;
+    public bool _arrived = false;
 
     //no esta en herencia
     public GameObject playerGO;
@@ -41,8 +41,7 @@ public class AV : MonoBehaviour
         _renderer = GetComponent<MeshRenderer>();
         _line = Instantiate(linePrefab, Vector3.zero, Quaternion.identity);
         _line.enabled = false;
-        
-        
+
     }
 
     private void DestroyMe()
@@ -52,13 +51,16 @@ public class AV : MonoBehaviour
 
     protected virtual void Start()
     {
-        playerGO = FindObjectOfType<Player>().transform.gameObject;
-        SettingNewDestiny();
+      
+        playerGO = FindObjectOfType<Player>().gameObject;
         playerSCR = playerGO.GetComponent<Player>();
+        SettingNewDestiny();
+       
     }
 
     protected virtual void Update()
     {
+
         if ((transform.position == _targetPosition) && !_arrived)
             ArrivedMethod();
 
