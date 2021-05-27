@@ -12,14 +12,14 @@ public class AV : MonoBehaviour
 
     [Header("Line Path Settings")]
     public LineRenderer linePrefab;
-    LineRenderer _line;
+    protected LineRenderer _line;
 
     public int destinyIndex = 0;
     float _journeyLength;
     float _startTime;
-    float _currTimeInDevice;
+    protected float _currTimeInDevice;
     Vector3 _startPosition;
-    Vector3 _targetPosition;
+    protected Vector3 _targetPosition;
 
     [Header("Device pattern")]
     public List<Device> devices = new List<Device>();
@@ -117,7 +117,7 @@ public class AV : MonoBehaviour
 
     }
 
-    void Movement()
+    protected virtual void Movement()
     {
         _targetPosition = devices[destinyIndex].transform.position;
         float _distCovered = (Time.time - _startTime) * speed;
@@ -125,7 +125,7 @@ public class AV : MonoBehaviour
         transform.position = Vector3.Lerp(_startPosition, _targetPosition, _fracJourney);
     }
 
-    void ArrivedMethod()
+    protected virtual void ArrivedMethod()
     {
         _arrived = true;
         _currTimeInDevice = timeInDevice;
