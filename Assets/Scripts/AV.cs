@@ -42,6 +42,7 @@ public class AV : MonoBehaviour
         _line = Instantiate(linePrefab, Vector3.zero, Quaternion.identity);
         _line.enabled = false;
         
+        
     }
 
     private void DestroyMe()
@@ -100,8 +101,7 @@ public class AV : MonoBehaviour
         }
 
         Attack();
-
-
+        
     }
 
 
