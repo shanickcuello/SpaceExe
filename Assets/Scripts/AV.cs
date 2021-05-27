@@ -12,14 +12,14 @@ public class AV : MonoBehaviour
 
     [Header("Line Path Settings")]
     public LineRenderer linePrefab;
-    LineRenderer _line;
+    protected LineRenderer _line;
 
-    int destinyIndex = 0;
+    public int destinyIndex = 0;
     float _journeyLength;
     float _startTime;
-    float _currTimeInDevice;
+    protected float _currTimeInDevice;
     Vector3 _startPosition;
-    Vector3 _targetPosition;
+    protected Vector3 _targetPosition;
 
     [Header("Device pattern")]
     public List<Device> devices = new List<Device>();
@@ -31,17 +31,17 @@ public class AV : MonoBehaviour
     public Player playerSCR;
 
 
-    bool _arrived = false;
+    public bool _arrived = false;
 
     //no esta en herencia
     public GameObject playerGO;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         _renderer = GetComponent<MeshRenderer>();
         _line = Instantiate(linePrefab, Vector3.zero, Quaternion.identity);
         _line.enabled = false;
-        
+
     }
 
     private void DestroyMe()
@@ -49,15 +49,18 @@ public class AV : MonoBehaviour
         Destroy(gameObject);
     }
 
-    private void Start()
+    protected virtual void Start()
     {
-        playerGO = FindObjectOfType<Player>().transform.gameObject;
-        SettingNewDestiny();
+      
+        playerGO = FindObjectOfType<Player>().gameObject;
         playerSCR = playerGO.GetComponent<Player>();
+        SettingNewDestiny();
+       
     }
 
     protected virtual void Update()
     {
+
         if ((transform.position == _targetPosition) && !_arrived)
             ArrivedMethod();
 
@@ -100,8 +103,7 @@ public class AV : MonoBehaviour
         }
 
         Attack();
-
-
+        
     }
 
 
@@ -109,13 +111,13 @@ public class AV : MonoBehaviour
     {
         if (transform.position == playerGO.transform.position)
         {
-            playerSCR.LifeController();
+            playerSCR.TakeDamage();
         }
 
 
     }
 
-    void Movement()
+    protected virtual void Movement()
     {
         _targetPosition = devices[destinyIndex].transform.position;
         float _distCovered = (Time.time - _startTime) * speed;
@@ -123,7 +125,7 @@ public class AV : MonoBehaviour
         transform.position = Vector3.Lerp(_startPosition, _targetPosition, _fracJourney);
     }
 
-    void ArrivedMethod()
+    protected virtual void ArrivedMethod()
     {
         _arrived = true;
         _currTimeInDevice = timeInDevice;
