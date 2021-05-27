@@ -12,18 +12,18 @@ public class AV : MonoBehaviour
 
     [Header("Line Path Settings")]
     public LineRenderer linePrefab;
-    LineRenderer _line;
+    [SerializeField] protected LineRenderer _line;
 
-    int destinyIndex = 0;
+    protected int destinyIndex = 0;
     float _journeyLength;
     float _startTime;
-    float _currTimeInDevice;
+    protected float _currTimeInDevice;
     Vector3 _startPosition;
-    Vector3 _targetPosition;
+    protected Vector3 _targetPosition;
 
     [Header("Device pattern")]
     public List<Device> devices = new List<Device>();
-    Device _currDevice;
+    protected Device _currDevice;
 
     MeshRenderer _renderer;
 
@@ -31,7 +31,7 @@ public class AV : MonoBehaviour
     public Player playerSCR;
 
 
-    bool _arrived = false;
+    protected bool _arrived = false;
 
     //no esta en herencia
     public GameObject playerGO;
@@ -105,7 +105,7 @@ public class AV : MonoBehaviour
     }
 
 
-    void Attack()
+    protected void Attack()
     {
         if (transform.position == playerGO.transform.position)
         {
@@ -115,7 +115,7 @@ public class AV : MonoBehaviour
 
     }
 
-    void Movement()
+    protected virtual void Movement()
     {
         _targetPosition = devices[destinyIndex].transform.position;
         float _distCovered = (Time.time - _startTime) * speed;
@@ -123,7 +123,7 @@ public class AV : MonoBehaviour
         transform.position = Vector3.Lerp(_startPosition, _targetPosition, _fracJourney);
     }
 
-    void ArrivedMethod()
+    protected virtual void ArrivedMethod()
     {
         _arrived = true;
         _currTimeInDevice = timeInDevice;
