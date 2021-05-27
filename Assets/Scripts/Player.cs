@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.Experimental.VFX;
 using System;
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, IGridEntity
 {
     GameManager gameManagerSCR;
     [Header("Camera settings")]
@@ -49,6 +49,15 @@ public class Player : MonoBehaviour
     [Header("[Testing]")]
     public GameObject directionalLight;
     [SerializeField] float simulationTime;
+
+
+    public event Action<IGridEntity> OnMove;
+
+    public Vector3 Position
+    {
+        get => transform.position;
+        set => transform.position = value;
+    }
 
 
     void Start()
@@ -219,7 +228,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void LifeController()
+    public void TakeDamage()
     {
         life -= Time.deltaTime * 10;
         gameManagerSCR.BeingAttacked();

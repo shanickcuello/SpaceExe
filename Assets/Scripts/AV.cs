@@ -36,7 +36,7 @@ public class AV : MonoBehaviour
     //no esta en herencia
     public GameObject playerGO;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         _renderer = GetComponent<MeshRenderer>();
         _line = Instantiate(linePrefab, Vector3.zero, Quaternion.identity);
@@ -49,7 +49,7 @@ public class AV : MonoBehaviour
         Destroy(gameObject);
     }
 
-    private void Start()
+    protected virtual void Start()
     {
         playerGO = FindObjectOfType<Player>().transform.gameObject;
         SettingNewDestiny();
@@ -109,7 +109,7 @@ public class AV : MonoBehaviour
     {
         if (transform.position == playerGO.transform.position)
         {
-            playerSCR.LifeController();
+            playerSCR.TakeDamage();
         }
 
 
