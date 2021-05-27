@@ -36,7 +36,7 @@ public class AV : MonoBehaviour
     //no esta en herencia
     public GameObject playerGO;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         _renderer = GetComponent<MeshRenderer>();
         _line = Instantiate(linePrefab, Vector3.zero, Quaternion.identity);
@@ -111,7 +111,7 @@ public class AV : MonoBehaviour
     {
         if (transform.position == playerGO.transform.position)
         {
-            playerSCR.LifeController();
+            playerSCR.TakeDamage();
         }
 
 

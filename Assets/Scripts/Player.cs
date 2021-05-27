@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.Experimental.VFX;
 using System;
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, IGridEntity
 {
     GameManager gameManagerSCR;
     [Header("Camera settings")]
@@ -51,6 +51,15 @@ public class Player : MonoBehaviour
     [SerializeField] float simulationTime;
 
 
+    public event Action<IGridEntity> OnMove;
+
+    public Vector3 Position
+    {
+        get => transform.position;
+        set => transform.position = value;
+    }
+
+
     void Start()
     {
         Time.timeScale = simulationTime;
@@ -59,7 +68,7 @@ public class Player : MonoBehaviour
         targetTransform = device.transform;
         SetInitialDestiny(targetTransform);
 
-        life = 60;
+        life = 100;
 
         cameraPivot = GameObject.Find("CameraPivot");
         cameraScript = cameraPLayer.GetComponent<CameraTwo>();
@@ -109,7 +118,7 @@ public class Player : MonoBehaviour
         if (isIndevice)
             OnDeviceStay();
 
-        gameManagerSCR.lifeBar.fillValue = life * 1 / 60;
+        gameManagerSCR.lifeBar.fillValue = life * 1 / 100;
     }
 
     public void MouseManager()
@@ -213,13 +222,13 @@ public class Player : MonoBehaviour
 
     public void LifeManager()
     {
-        if (life >= 60)
+        if (life >= 100)
         {
-            life = 60;
+            life = 100;
         }
     }
 
-    public void LifeController()
+    public void TakeDamage()
     {
         life -= Time.deltaTime * 10;
         gameManagerSCR.BeingAttacked();
