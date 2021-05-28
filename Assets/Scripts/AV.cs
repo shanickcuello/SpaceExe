@@ -17,6 +17,7 @@ public class AV : MonoBehaviour
     protected int destinyIndex = 0;
     float _journeyLength;
     float _startTime;
+    public float avType;
     protected float _currTimeInDevice;
     Vector3 _startPosition;
     protected Vector3 _targetPosition;
@@ -41,6 +42,16 @@ public class AV : MonoBehaviour
         _renderer = GetComponent<MeshRenderer>();
         _line = Instantiate(linePrefab, Vector3.zero, Quaternion.identity);
         _line.enabled = false;
+
+        if (avType == 1)
+        {
+            devices = DeviceManager.GetNearMe(transform.position, 30);
+        }
+
+        if (avType == 2)
+        {
+            devices = DeviceManager.GetPcDevices(transform.position);
+        }
         
     }
 

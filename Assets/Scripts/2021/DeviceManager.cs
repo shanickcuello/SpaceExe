@@ -104,12 +104,13 @@ public class DeviceManager : MonoBehaviour
         return returnDevice;
     }
 
-    public static List<Device> GetPcDevices()
+    public static List<Device> GetPcDevices(Vector3 myPos)
     {
         List<Device> returnList = new List<Device>();
 
         returnList = deviceList
             .Where(x => x.gameObject.GetComponent<PCDevice>())
+            .OrderBy(x => Vector3.Distance(x.transform.position, myPos))
             .Take(10)
             .ToList();
 

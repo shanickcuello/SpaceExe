@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="C:\Users\Javo\AppData\Local\JetBrains\Rider2020.2\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\Javo\AppData\Local\JetBrains\Rider2020.2\resharper-host\Local\Transient\Rider\v202\SolutionCaches\_SpaceExe.-1417091310.00" t="ExcludeRecursive" />
+    <e p="C:\Users\Javo\Desktop\TP1IA2\SpaceExe" t="IncludeRecursive">
+      <e p="Assembly-CSharp-Editor.csproj" t="IncludeRecursive" />
+      <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
+      <e p="Assets" t="Include">
+        <e p="AreaOpen.cs" t="Include" />
+        <e p="Arte" t="Include">
+          <e p="POLYGON - Sci-Fi City Pack v1.0" t="Include">
+            <e p="3D Models.txt" t="Include" />
+            <e p="PolygonSciFiCity" t="Include">
+              <e p="_Shaders" t="Include">
+                <e p="POLYGON_Triplanar.shader" t="Include" />
+                <e p="UVScroll.shader" t="Include" />
+              </e>
+            </e>
+          </e>
+        </e>
+        <e p="CommandsManager.cs" t="Include" />
+        <e p="Example" t="Include">
+          <e p="NewAssemblyReference.asmref" t="Include" />
+          <e p="Scripts" t="Include">
+            <e p="SimpleCameraController.cs" t="Include" />
+          </e>
+          <e p="TutorialInfo" t="Include">
+            <e p="Scripts" t="Include">
+              <e p="Editor" t="Include">
+                <e p="ReadmeEditor.cs" t="Include" />
+              </e>
+              <e p="Readme.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="Fx Explosion Pack" t="Include">
+          <e p="Script" t="Include">
+            <e p="csDemoScenceControl.cs" t="Include" />
+            <e p="csLightControl.cs" t="Include" />
+            <e p="csMouseOrbit.cs" t="Include" />
+            <e p="DestroyEffect.cs" t="Include" />
+          </e>
+        </e>
+        <e p="GetSloMo.cs" t="Include" />
+        <e p="Goal.cs" t="Include" />
+        <e p="GoalsManager.cs" t="Include" />
+        <e p="Joystick Pack" t="Include">
+          <e p="Examples" t="Include">
+            <e p="JoystickPlayerExample.cs" t="Include" />
+            <e p="JoystickSetterExample.cs" t="Include" />
+          </e>
+          <e p="Scripts" t="Include">
+            <e p="Base" t="Include">
+              <e p="Joystick.cs" t="Include" />
+            </e>
+            <e p="Editor" t="Include">
+              <e p="DynamicJoystickEditor.cs" t="Include" />
+              <e p="FloatingJoystickEditor.cs" t="Include" />
+              <e p="JoystickEditor.cs" t="Include" />
+              <e p="VariableJoystickEditor.cs" t="Include" />
+            </e>
+            <e p="Joysticks" t="Include">
+              <e p="DynamicJoystick.cs" t="Include" />
+              <e p="FixedJoystick.cs" t="Include" />
+              <e p="FloatingJoystick.cs" t="Include" />
+              <e p="VariableJoystick.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="MaterialsShaders" t="Include">
+          <e p="Hologram" t="Include">
+            <e p="Documentation.txt" t="Include" />
+            <e p="Shader" t="Include">
+              <e p="BaiscRim.shader" t="Include" />
+              <e p="BasicHologram.shader" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="MovementController.cs" t="Include" />
+        <e p="Scripts" t="Include">
+          <e p="2021" t="Include">
+            <e p="AVRadar.cs" t="Include" />
+            <e p="Boss.cs" t="Include" />
+            <e p="Command.cs" t="Include" />
+            <e p="Console.cs" t="Include" />
+            <e p="DeviceManager.cs" t="Include" />
+            <e p="DialogueSystem" t="Include">
+              <e p="DialogueSystem.cs" t="Include" />
+              <e p="ScreenStruct.cs" t="Include" />
+            </e>
+            <e p="Enemys" t="Include">
+              <e p="RangeAttackEnemy.cs" t="Include" />
+            </e>
+            <e p="SpatialGrid" t="Include">
+              <e p="Enemy.cs" t="Include" />
+              <e p="Grid" t="Include">
+                <e p="IGridEntity.cs" t="Include" />
+                <e p="Query" t="Include">
+                  <e p="IQuery.cs" t="Include" />
+                  <e p="SquareQuery.cs" t="Include" />
+                </e>
+                <e p="SpatialGrid.cs" t="Include" />
+                <e p="Util.cs" t="Include" />
+              </e>
+            </e>
+            <e p="UserInputsMobile.cs" t="Include" />
+          </e>
+          <e p="AI.cs" t="Include" />
+          <e p="AutoDestroy.cs" t="Include" />
+          <e p="AV.cs" t="Include" />
+          <e p="backup old" t="Include">
+            <e p="AV - 190411.txt" t="Include" />
+          </e>
+          <e p="BoxColliderDialogue.cs" t="Include" />
+          <e p="Bullet.cs" t="Include" />
+          <e p="Buttons" t="Include">
+            <e p="HoldButton.cs" t="Include" />
+            <e p="PressButton.cs" t="Include" />
+          </e>
+          <e p="CameraDevice.cs" t="Include" />
+          <e p="CameraTwo.cs" t="Include" />
+          <e p="Cuchurruchin.cs" t="Include" />
+          <e p="Device.cs" t="Include" />
+          <e p="Dialogue.cs" t="Include" />
+          <e p="DialogueManager.cs" t="Include" />
+          <e p="DialogueTrigger.cs" t="Include" />
+          <e p="Events" t="Include">
+            <e p="CheckPoint.cs" t="Include" />
+            <e p="EventsManager.cs" t="Include" />
+          </e>
+          <e p="GameManager.cs" t="Include" />
+          <e p="Gates" t="Include">
+            <e p="OpenGate.cs" t="Include" />
+            <e p="OpenHoldGate.cs" t="Include" />
+          </e>
+          <e p="HackDuct.cs" t="Include" />
+          <e p="HackPanel.cs" t="Include" />
+          <e p="herencyTest" t="Include">
+            <e p="hijo.cs" t="Include" />
+            <e p="padre.cs" t="Include" />
+          </e>
+          <e p="LifeBoxDevice.cs" t="Include" />
+          <e p="MenuManager.cs" t="Include" />
+          <e p="Nav_Mesh" t="Include">
+            <e p="NavMeshLink.cs" t="Include" />
+            <e p="NavMeshModifier.cs" t="Include" />
+            <e p="NavMeshModifierVolume.cs" t="Include" />
+            <e p="NavMeshSurface.cs" t="Include" />
+          </e>
+          <e p="Particles" t="Include">
+            <e p="Particles.cs" t="Include" />
+          </e>
+          <e p="Pause" t="Include">
+            <e p="OpenUI.cs" t="Include" />
+          </e>
+          <e p="PCDevice.cs" t="Include" />
+          <e p="Player.cs" t="Include" />
+          <e p="Robot.cs" t="Include" />
+          <e p="SlowMo.cs" t="Include" />
+          <e p="SmoothCamera.cs" t="Include" />
+          <e p="Sounds" t="Include">
+            <e p="MusicPlayer.cs" t="Include" />
+            <e p="SFXPlayer.cs" t="Include" />
+            <e p="SoundManager.cs" t="Include" />
+          </e>
+          <e p="Turret.cs" t="Include" />
+          <e p="UI" t="Include">
+            <e p="DamageScreen.cs" t="Include" />
+            <e p="LifeBar.cs" t="Include" />
+          </e>
+          <e p="WinTrigger.cs" t="Include" />
+        </e>
+        <e p="UiMenuManager.cs" t="Include" />
+      </e>
+      <e p="obj" t="ExcludeRecursive" />
+      <e p="Packages" t="ExcludeRecursive" />
+      <e p="SpaceExe.sln" t="IncludeFlat" />
+      <e p="Temp\bin" t="ExcludeRecursive" />
+    </e>
+  </component>
+</project>
