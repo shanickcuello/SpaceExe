@@ -72,7 +72,6 @@ public class RangeAttackEnemy : AV, IGridEntity
                 {
                     destinyIndex = 0;
                 }
-                
             }
         }
         Attack();
@@ -80,13 +79,13 @@ public class RangeAttackEnemy : AV, IGridEntity
 
 
 
-    bool SearchPlayer() //IA2-P2 este codigo se ejecuta solo cuando este enemigo llega a su destino, por lo que no se ejecuta en update.
+    bool SearchPlayer() //IA2-P2 este codigo se ejecuta solo cuando este enemigo esta por saltar a un nuevo destino. No se ejecuta en update.
     {
         foreach (var item in squareQuery.Query()) 
         {
             if (item.Equals(playerSCR))
             {
-                Debug.LogError("Encontre al player");
+                Debug.Log("Encontre al player");
                 return true;
             }
         }
