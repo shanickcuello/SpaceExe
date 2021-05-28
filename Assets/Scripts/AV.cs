@@ -8,16 +8,24 @@ public class AV : MonoBehaviour
 {
     [Header("Basic Settigns")]
     public float speed;
-
     public float timeInDevice;
 
     [Header("Line Path Settings")]
     public LineRenderer linePrefab;
+    protected LineRenderer _line;
 
     public int destinyIndex = 0;
+    float _journeyLength;
+    float _startTime;
+    protected float _currTimeInDevice;
+    Vector3 _startPosition;
+    protected Vector3 _targetPosition;
 
     [Header("Device pattern")]
     public List<Device> devices = new List<Device>();
+    protected Device _currDevice;
+
+    MeshRenderer _renderer;
 
     //esto no esta en herencia
     public Player playerSCR;
@@ -27,22 +35,18 @@ public class AV : MonoBehaviour
 
     //no esta en herencia
     public GameObject playerGO;
-    protected Device _currDevice;
-    protected float _currTimeInDevice;
-    float _journeyLength;
-    protected LineRenderer _line;
 
-    MeshRenderer _renderer;
-    Vector3 _startPosition;
-    float _startTime;
-    protected Vector3 _targetPosition;
-
-    private void Awake()
+    protected virtual void Awake()
     {
         _renderer = GetComponent<MeshRenderer>();
         _line = Instantiate(linePrefab, Vector3.zero, Quaternion.identity);
         _line.enabled = false;
 
+    }
+
+    private void DestroyMe()
+    {
+        Destroy(gameObject);
     }
 
     protected virtual void Start()
@@ -102,17 +106,12 @@ public class AV : MonoBehaviour
         
     }
 
-    private void DestroyMe()
-    {
-        Destroy(gameObject);
-    }
 
-
-    protected virtual void Attack()
+    protected void Attack()
     {
         if (transform.position == playerGO.transform.position)
         {
-            playerSCR.LifeController();
+            playerSCR.TakeDamage();
         }
 
 
