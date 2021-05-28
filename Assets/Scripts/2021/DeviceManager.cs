@@ -60,6 +60,49 @@ public class DeviceManager : MonoBehaviour
         return returnList;
     }
 
+    public static Device GetNearestDevice(Vector3 myPos, float range)
+    {
+        List<Tuple<Device, float>> newList = new List<Tuple<Device, float>>();
+
+        for (int i = 0; i < deviceList.Count; i++)
+        {
+            var distance = Vector3.Distance(deviceList[i].transform.position, myPos);
+            if (distance < range)
+                newList.Add(new Tuple<Device, float>(deviceList[i], distance));
+        }
+
+        var returnDevice = newList
+            .Where(x => x.Item2 <= range) //filtra los que estan demasiado lejos
+            .OrderBy(x => x.Item2).ToList() //ordena por distancia
+            .Take(6)
+            .Aggregate((a, b) => a.Item2 < b.Item2 ? a : b).Item1;
+
+        return returnDevice;
+    }
+
+    public static Device GetNearestDevice(Vector3 myPos, float range, Queue<Device> toSkipDevices) //IA2-P3
+    {
+        List<Tuple<Device, float>> newList = new List<Tuple<Device, float>>();
+
+        for (int i = 0; i < deviceList.Count; i++)
+        {
+            var distance = Vector3.Distance(deviceList[i].transform.position, myPos);
+            if (distance < range)
+                newList.Add(new Tuple<Device, float>(deviceList[i], distance));
+        }
+
+        var returnDevice = newList
+            .Where(x => x.Item2 <= range) //filtra los que estan demasiado lejos
+            .OrderBy(x => x.Item2)
+            .Select(x => x.Item1)
+            .ToList()
+            .Where(x => x != toSkipDevices.Contains(x))//ordena por distancia
+            .Take(1)
+            .FirstOrDefault();
+
+        return returnDevice;
+    }
+
     public static List<Device> GetPcDevices()
     {
         List<Device> returnList = new List<Device>();

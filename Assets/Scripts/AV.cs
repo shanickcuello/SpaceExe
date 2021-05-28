@@ -112,7 +112,6 @@ public class AV : MonoBehaviour
             playerSCR.TakeDamage();
         }
 
-
     }
 
     protected virtual void Movement()
@@ -140,11 +139,22 @@ public class AV : MonoBehaviour
         _startTime = Time.time;
         _startPosition = transform.position;
         _journeyLength = Vector3.Distance(_startPosition, _targetPosition);
-
         _arrived = false;
-        //GetComponentInChildren<VisualEffect>().Play();
         _renderer.enabled = true;
     }
+
+    protected virtual void SettingNewDestiny(Device device)
+    {
+        devices.Add(device);
+        devices.RemoveAt(0);
+        _targetPosition = device.transform.position;
+        _startTime = Time.time;
+        _startPosition = transform.position;
+        _journeyLength = Vector3.Distance(_startPosition, _targetPosition);
+        _arrived = false;
+        _renderer.enabled = true;
+    }
+
 
     void SetMaterialToDevice()
     {
