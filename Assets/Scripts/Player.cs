@@ -22,6 +22,10 @@ public class Player : MonoBehaviour, IGridEntity
     float _startTimeToMovement;
     float _distancetoTarget;
 
+    public Text targetTextDisplay;
+    public GameObject targetText;
+    List<Device> nearDevices;
+
     [Header("Devices")]
     public bool isIndevice;
     public Device device;
@@ -72,6 +76,7 @@ public class Player : MonoBehaviour, IGridEntity
         targetTransform = device.transform;
         SetInitialDestiny(targetTransform);
         InitialiceVisitedsDecivesQueue();
+
 
         life = 100;
 
@@ -219,6 +224,9 @@ public class Player : MonoBehaviour, IGridEntity
         {
             if (hitInfo.transform.gameObject.GetComponent<Device>() == true && currentDistanceAvaibleToJump > Vector3.Distance(transform.position, hitInfo.transform.position))
             {
+                var hitDevice = hitInfo.transform.gameObject.GetComponent<Device>();
+                targetText.SetActive(true);
+                targetTextDisplay.text = DeviceManager.GetTargetNameAndDistance(transform.position, nearDevices, hitDevice);
 
                 if (hitInfo.transform.gameObject.GetComponent<Device>())
                 {
@@ -258,6 +266,8 @@ public class Player : MonoBehaviour, IGridEntity
             }
             else
             {
+                targetText.SetActive(false);
+                targetTextDisplay.text = "";
                 if (line.enabled == true)
                 {
                     line.enabled = false;
@@ -332,6 +342,7 @@ public class Player : MonoBehaviour, IGridEntity
         if (isIndevice)
         {
             device.HackDevice();
+            nearDevices = DeviceManager.GetNearMe(transform.position, jumpRange);
         }
 
         device.OnEntityEnter(0);

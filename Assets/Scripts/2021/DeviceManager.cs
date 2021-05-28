@@ -21,33 +21,34 @@ public class DeviceManager : MonoBehaviour
 
         deviceList = GameObject.FindObjectsOfType<Device>().ToList();
     }
-    
+
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public static List<Device> GetDevices()
     {
         return deviceList;
     }
-    
+
     //ZIP - tal vez ponerle indices a algo
     //Aggregate - buscar la forma de usarlo para reemplazar algun select
     //Tal vez setear algun valor comparado a algun device (velocidad tal vez)
-    
+
     //IA2-P2”
 
     public static List<Device> GetNearMe(Vector3 myPos, float range) //Dada la posición de la IA y un rango de búsqueda, toma los 6 devices más cercanos dentro de un rango, los ordena y los devuelve para pasar como objetivos de la IA.
     {
         List<Tuple<Device, float>> newList = new List<Tuple<Device, float>>();
 
-        for (int i = 0; i < deviceList.Count; i++) {
+        for (int i = 0; i < deviceList.Count; i++)
+        {
             var distance = Vector3.Distance(deviceList[i].transform.position, myPos);
             if (distance < range)
-            newList.Add(new Tuple<Device, float>(deviceList[i], distance));
+                newList.Add(new Tuple<Device, float>(deviceList[i], distance));
         }
 
         var returnList = newList
@@ -106,16 +107,42 @@ public class DeviceManager : MonoBehaviour
     public static List<Device> GetPcDevices()
     {
         List<Device> returnList = new List<Device>();
-        
+
         returnList = deviceList
             .Where(x => x.gameObject.GetComponent<PCDevice>())
             .Take(10)
             .ToList();
 
         return returnList;
-        
-       // var Test = deviceList.Aggregate()
+
+        // var Test = deviceList.Aggregate()
     }
-    
+
+
+    public static string GetTargetNameAndDistance(Vector3 myPos, List<Device> myDevices, Device myDevice) //IA2-P3
+    {
+        List<float> newList = new List<float>();
+
+        if (myDevices != null)
+        {
+
+            for (int i = 0; i < myDevices.Count; i++)
+            {
+                var distance = Vector3.Distance(myDevices[i].transform.position, myPos);
+                newList.Add(distance);
+            }
+
+            int index = myDevices.FindIndex(a => a == myDevice);
+
+            var returnString = newList //filtra los que estan demasiado lejos
+                .Skip(index - 1)
+                .Zip(myDevices, (x, y) => "Hacking: " + y.gameObject.name + "\n" + "Distance:" + x.ToString("0.00"))
+                .Take(1)
+                .FirstOrDefault();
+
+            return returnString;
+        }
+        return default;
+    }
     
 }
