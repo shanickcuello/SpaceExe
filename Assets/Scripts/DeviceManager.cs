@@ -35,9 +35,7 @@ public class DeviceManager : MonoBehaviour
     }
     
     //ZIP - tal vez ponerle indices a algo
-    //Aggregate - buscar la forma de usarlo para reemplazar algun select
-    //Tal vez setear algun valor comparado a algun device (velocidad tal vez)
-    
+
     //IA2-P2”
 
     public static List<Device> GetNearMe(Vector3 myPos, float range) //Dada la posición de la IA y un rango de búsqueda, toma los 6 devices más cercanos dentro de un rango, los ordena y los devuelve para pasar como objetivos de la IA.
@@ -60,6 +58,45 @@ public class DeviceManager : MonoBehaviour
         return returnList;
     }
 
+    public static String GetObjectiveNameAndDistance(Vector3 myPos, List<Device> myDevices, Device myDevice)
+    {
+        List<float> newList = new List<float>();
+
+        for (int i = 0; i < myDevices.Count; i++) {
+            var distance = Vector3.Distance(myDevices[i].transform.position, myPos);
+            newList.Add(distance);
+        }
+        
+        int index = myDevices.FindIndex(a => a == myDevice);
+
+        var returnString = newList //filtra los que estan demasiado lejos
+            .Skip(index - 1)
+            .Zip(myDevices, (x, y) => "Going to: " + y.gameObject.name + "\n" + ", distance:" + x)
+            .Take(1)
+            .FirstOrDefault();
+
+         return returnString;
+    }
+
+    public static Device GetNearestDevice(Vector3 myPos, float range)
+    {
+         List<Tuple<Device, float>> newList = new List<Tuple<Device, float>>();
+
+            for (int i = 0; i < deviceList.Count; i++) {
+                var distance = Vector3.Distance(deviceList[i].transform.position, myPos);
+                if (distance < range)
+                    newList.Add(new Tuple<Device, float>(deviceList[i], distance));
+            }
+
+            var returnDevice = newList
+                .Where(x => x.Item2 <= range) //filtra los que estan demasiado lejos
+                .OrderBy(x => x.Item2).ToList() //ordena por distancia
+                .Take(6)
+                .Aggregate((a, b) => a.Item2 < b.Item2 ? a : b).Item1;
+
+            return returnDevice;
+    }
+
     public static List<Device> GetPcDevices()
     {
         List<Device> returnList = new List<Device>();
@@ -70,8 +107,6 @@ public class DeviceManager : MonoBehaviour
             .ToList();
 
         return returnList;
-        
-       // var Test = deviceList.Aggregate()
     }
     
     

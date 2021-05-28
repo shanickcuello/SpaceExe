@@ -8,24 +8,16 @@ public class AV : MonoBehaviour
 {
     [Header("Basic Settigns")]
     public float speed;
+
     public float timeInDevice;
 
     [Header("Line Path Settings")]
     public LineRenderer linePrefab;
-    LineRenderer _line;
 
     public int destinyIndex = 0;
-    float _journeyLength;
-    float _startTime;
-    float _currTimeInDevice;
-    Vector3 _startPosition;
-    Vector3 _targetPosition;
 
     [Header("Device pattern")]
     public List<Device> devices = new List<Device>();
-    Device _currDevice;
-
-    MeshRenderer _renderer;
 
     //esto no esta en herencia
     public Player playerSCR;
@@ -35,6 +27,15 @@ public class AV : MonoBehaviour
 
     //no esta en herencia
     public GameObject playerGO;
+    protected Device _currDevice;
+    protected float _currTimeInDevice;
+    float _journeyLength;
+    protected LineRenderer _line;
+
+    MeshRenderer _renderer;
+    Vector3 _startPosition;
+    float _startTime;
+    protected Vector3 _targetPosition;
 
     private void Awake()
     {
@@ -42,11 +43,6 @@ public class AV : MonoBehaviour
         _line = Instantiate(linePrefab, Vector3.zero, Quaternion.identity);
         _line.enabled = false;
 
-    }
-
-    private void DestroyMe()
-    {
-        Destroy(gameObject);
     }
 
     protected virtual void Start()
@@ -106,8 +102,13 @@ public class AV : MonoBehaviour
         
     }
 
+    private void DestroyMe()
+    {
+        Destroy(gameObject);
+    }
 
-    void Attack()
+
+    protected virtual void Attack()
     {
         if (transform.position == playerGO.transform.position)
         {
@@ -117,7 +118,7 @@ public class AV : MonoBehaviour
 
     }
 
-    void Movement()
+    protected virtual void Movement()
     {
         _targetPosition = devices[destinyIndex].transform.position;
         float _distCovered = (Time.time - _startTime) * speed;
@@ -125,7 +126,7 @@ public class AV : MonoBehaviour
         transform.position = Vector3.Lerp(_startPosition, _targetPosition, _fracJourney);
     }
 
-    void ArrivedMethod()
+    protected virtual void ArrivedMethod()
     {
         _arrived = true;
         _currTimeInDevice = timeInDevice;

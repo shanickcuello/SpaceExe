@@ -18,6 +18,9 @@ public class Player : MonoBehaviour
     public float speedMovement;
     public float speedCameraMoovment;
     public float speedRotationCamera;
+    public GameObject textPrefab;
+    public Text myText;
+    public List<Device> devicesNearMe;
     [SerializeField] FixedJoystick fixedJoystick;
     float _startTimeToMovement;
     float _distancetoTarget;
@@ -127,8 +130,11 @@ public class Player : MonoBehaviour
         if (Physics.Raycast(ray, out hitInfo, range))
         {
             if (hitInfo.transform.gameObject.GetComponent<Device>() == true && currentDistanceAvaibleToJump > Vector3.Distance(transform.position, hitInfo.transform.position))
-            {
-
+            {  
+                var hitDevice = hitInfo.transform.gameObject.GetComponent<Device>();
+                textPrefab.SetActive(true);
+                myText.text = DeviceManager.GetObjectiveNameAndDistance(transform.position, devicesNearMe, hitDevice);
+                
                 if (hitInfo.transform.gameObject.GetComponent<Device>())
                 {
                     Device deviceToGo = hitInfo.transform.gameObject.GetComponent<Device>();
@@ -170,6 +176,7 @@ public class Player : MonoBehaviour
                 if (line.enabled == true)
                 {
                     line.enabled = false;
+                    textPrefab.SetActive(false);
                 }
             }
         }
@@ -237,6 +244,7 @@ public class Player : MonoBehaviour
     void OnDeviceEnter()
     {
         isIndevice = true;
+        devicesNearMe = DeviceManager.GetNearMe(targetTransform.position, normalDistanceAvaivleToJump);
         //_device.SetMaterial(_playerMesh.material);
         device = targetTransform.GetComponent<Device>();
 

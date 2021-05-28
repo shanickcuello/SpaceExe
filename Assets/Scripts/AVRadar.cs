@@ -5,11 +5,8 @@ using UnityEngine;
 
 public class AVRadar : AV
 {
-    Device deviceTarget, newTarget;
     [SerializeField] Device startDevice, endDevice;
-    float currentCounter;
     [SerializeField] float counterToAttack;
-    bool followPlayer;
     public float distanceToScan;
     public bool seenPlayer;
     public bool scanned;
@@ -17,69 +14,23 @@ public class AVRadar : AV
     public Device targetToAdd;
     public float scanTime;
     public Device targetDevice;
-
-    protected override void Update()
-    {
-
-        if ((transform.position == _targetPosition) && !_arrived)
-        {
-            DoScanAction();
-            ArrivedMethod();
-        }
-        
-        if (!_arrived)
-            Movement();
-
-        if (_arrived)
-        {
-            _currTimeInDevice -= Time.deltaTime;
-
-            //Si al jugador le falta la mitad de tiempo para salir del dispositivo actual, muestra la línea apuntando al próximo dispositivo a saltar.
-            if (_currTimeInDevice <= (timeInDevice / 2) && !_line.enabled)
-            {
-                int _tempDestIndex = 0;
-
-                if (!seenPlayer)
-                {
-                    
-                    
-                    if (_tempDestIndex >= devices.Count)
-                    {
-                        _tempDestIndex = 0;
-                    }
-                }
-                else _tempDestIndex = destinyIndex;
-                
-                _line.enabled = true;
-                _line.SetPosition(0, transform.position);
-                _line.SetPosition(1, devices[_tempDestIndex].transform.position);
-            }
-
-            if (_currTimeInDevice <= 0)
-            {
-
-                _line.enabled = false;
-                //_currDevice.SetDefaultMaterial();
-                _currDevice.OnEntityExit();
-
-                destinyIndex++;
-                if (destinyIndex >= devices.Count)
-                {
-                    destinyIndex = 0;
-                }
-
-                SettingNewDestiny();
-            }
-        }
-
-        Attack();
-    }
+    public Device nearest;
+    float currentCounter;
+    Device deviceTarget, newTarget;
+    bool followPlayer;
 
     protected override void Start()
     {
         devices = DeviceManager.GetNearMe(transform.position, distanceToScan);
+        devices.Add(DeviceManager.GetNearestDevice(transform.position,distanceToScan));
+        nearest = DeviceManager.GetNearestDevice(transform.position, distanceToScan);
         base.Start();
-        
+    }
+
+    protected override void Update()
+    {
+        base.Update();
+        DoScanAction();
     }
 
     void DoScanAction()
@@ -92,7 +43,6 @@ public class AVRadar : AV
                 ScanForPlayer();
                 scanned = true;
                 scanCounter = scanTime;
-                Debug.Log("escaneo");
             }
         }
         else
@@ -150,5 +100,4 @@ public class AVRadar : AV
         }
 
     }
-    
 }
